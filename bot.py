@@ -17,15 +17,15 @@ def send_message(bot, answer, chat_id):
         if result:
             bot.send_message(
                 text=f'''Преподаватель проверил работу "{lesson_title}"
-                \nссылка: {lesson_url}
-                \nЕсть ошибки, работа не принята.''',
+                \nЕсть ошибки, работа не принята.
+                \nссылка: {lesson_url}''',
                 chat_id=chat_id,
             )
         else:
             bot.send_message(
                 text=f'''Преподаватель проверил работу "{lesson_title}"
-                \nссылка {lesson_url}
-                \nОшибок нет, работа принята''',
+                \nОшибок нет, работа принята
+                \nссылка {lesson_url}''',
                 chat_id=chat_id,
             )
 
@@ -52,12 +52,12 @@ def main():
     env = Env()
     env.read_env('.env')
     bot_api = env('TELEGRAM_TOKEN')
-    devm_api = env('DEVMAN_API')
+    dvm_api = env('DEVMAN_API')
     chat_id = env('TG_USER_CHAT_ID')
     bot = telegram.Bot(bot_api)
     url = 'https://dvmn.org/api/long_polling/'
     headers = {
-        'Authorization': devm_api,
+        'Authorization': dvm_api,
     }
     polls(url, headers, bot, chat_id)
 
