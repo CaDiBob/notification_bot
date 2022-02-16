@@ -37,7 +37,8 @@ def polls(url, headers, bot, chat_id):
             response = requests.get(
                 url,
                 headers=headers,
-                params={'timestamp': timestamp}
+                params={'timestamp': timestamp},
+                timeout=90,
             )
             answer = response.json()
             if answer.get('new_attempts'):
