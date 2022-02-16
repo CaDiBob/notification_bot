@@ -4,7 +4,6 @@ import telegram
 import time
 
 from environs import Env
-from pprint import pprint
 
 
 logger = logging.getLogger('bot')
