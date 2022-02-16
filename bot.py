@@ -30,7 +30,8 @@ def send_message(bot, answer, chat_id):
             )
 
 
-def polls(url, headers, bot, chat_id):
+def polls(headers, bot, chat_id):
+    url = 'https://dvmn.org/api/long_polling/'
     while True:
         timestamp = int(time.time())
         try:
@@ -56,11 +57,10 @@ def main():
     dvm_api = env('DEVMAN_API')
     chat_id = env('TG_USER_CHAT_ID')
     bot = telegram.Bot(bot_api)
-    url = 'https://dvmn.org/api/long_polling/'
     headers = {
         'Authorization': dvm_api,
     }
-    polls(url, headers, bot, chat_id)
+    polls(headers, bot, chat_id)
 
 
 if __name__ == '__main__':
