@@ -33,16 +33,14 @@ def get_send_message(bot, answer, chat_id):
 def make_requests(headers, bot, chat_id):
     url = 'https://dvmn.org/api/long_polling/'
     while True:
-        timestamp = time.time()
         try:
             response = requests.get(
                 url,
                 headers=headers,
-                params={'timestamp': timestamp},
+                params={'timestamp': 'timestamp'},
                 timeout=90,
             )
             answer = response.json()
-            print(answer)
             if ('status',  'found') in answer.items():
                 get_send_message(bot, answer, chat_id)
         except requests.exceptions.ReadTimeout:
