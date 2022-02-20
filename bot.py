@@ -33,7 +33,7 @@ def get_send_message(bot, answer, chat_id):
 def make_requests(headers, bot, chat_id):
     url = 'https://dvmn.org/api/long_polling/'
     while True:
-        timestamp = int(time.time())
+        timestamp = time.time()
         try:
             response = requests.get(
                 url,
