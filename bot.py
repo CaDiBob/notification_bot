@@ -42,7 +42,8 @@ def make_requests(headers, bot, chat_id):
                 timeout=90,
             )
             answer = response.json()
-            if answer.get('new_attempts'):
+            print(answer)
+            if ('status',  'found') in answer.items():
                 get_send_message(bot, answer, chat_id)
         except requests.exceptions.ReadTimeout:
             logger.error(f'ReadTimeout: Нет проверенных работ!')
