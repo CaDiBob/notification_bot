@@ -30,7 +30,7 @@ def send_message(bot, answer, chat_id):
             )
 
 
-def polls(headers, bot, chat_id):
+def make_requests(headers, bot, chat_id):
     url = 'https://dvmn.org/api/long_polling/'
     while True:
         timestamp = int(time.time())
@@ -60,7 +60,7 @@ def main():
     headers = {
         'Authorization': dvm_api,
     }
-    polls(headers, bot, chat_id)
+    make_requests(headers, bot, chat_id)
 
 
 if __name__ == '__main__':
