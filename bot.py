@@ -10,10 +10,10 @@ logger = logging.getLogger('bot')
 
 
 def get_send_message(bot, answer, chat_id):
-    for elem in answer.get('new_attempts'):
-        lesson_title = elem.get('lesson_title')
-        lesson_url = elem.get('lesson_url')
-        result = elem.get('is_negative')
+    for result  in answer.get('new_attempts'):
+        lesson_title = result.get('lesson_title')
+        lesson_url = result.get('lesson_url')
+        result = result.get('is_negative')
         if result:
             bot.send_message(
                 text=f'''Преподаватель проверил работу "{lesson_title}"
