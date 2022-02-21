@@ -10,11 +10,11 @@ logger = logging.getLogger('bot')
 
 
 def send_notifications(bot, answer, chat_id):
-    for result  in answer.get('new_attempts'):
-        lesson_title = result.get('lesson_title')
-        lesson_url = result.get('lesson_url')
-        result = result.get('is_negative')
-        if result:
+    for attempt  in answer.get('new_attempts'):
+        lesson_title = attempt.get('lesson_title')
+        lesson_url = attempt.get('lesson_url')
+        attempt = attempt.get('is_negative')
+        if attempt:
             bot.send_message(
                 text=f'''Преподаватель проверил работу "{lesson_title}"
                 \nЕсть ошибки, работа не принята.
