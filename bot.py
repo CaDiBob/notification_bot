@@ -32,17 +32,19 @@ def send_notifications(bot, answer, chat_id):
 
 def make_requests(headers, bot, chat_id):
     url = 'https://dvmn.org/api/long_polling/'
+    timestamp=time.time()
     while True:
         try:
             response = requests.get(
                 url,
                 headers=headers,
-                params={'timestamp': 'timestamp'},
+                params={'timestamp': timestamp},
                 timeout=90,
             )
             answer = response.json()
             if ('status',  'found') in answer.items():
-                send_notifications(bot, answer, chat_id)
+                timestamp = answer.get('last_attempt_timestamp')
+                send_notifications(bot, answer, chat_id)           
         except requests.exceptions.ReadTimeout:
             logger.error(f'ReadTimeout: Нет проверенных работ!')
         except requests.exceptions.ConnectionError:
