@@ -9,7 +9,7 @@ from environs import Env
 logger = logging.getLogger('bot')
 
 
-def get_send_message(bot, answer, chat_id):
+def send_notifications(bot, answer, chat_id):
     for result  in answer.get('new_attempts'):
         lesson_title = result.get('lesson_title')
         lesson_url = result.get('lesson_url')
@@ -42,7 +42,7 @@ def make_requests(headers, bot, chat_id):
             )
             answer = response.json()
             if ('status',  'found') in answer.items():
-                get_send_message(bot, answer, chat_id)
+                send_notifications(bot, answer, chat_id)
         except requests.exceptions.ReadTimeout:
             logger.error(f'ReadTimeout: Нет проверенных работ!')
         except requests.exceptions.ConnectionError:
