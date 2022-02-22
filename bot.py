@@ -44,9 +44,11 @@ def make_requests(headers, bot, chat_id):
             answer = response.json()
             if ('status',  'found') in answer.items():
                 timestamp = answer.get('last_attempt_timestamp')
-                send_notifications(bot, answer, chat_id)           
+                send_notifications(bot, answer, chat_id)
+            else:
+                timestamp = answer.get('timestamp_to_request')
         except requests.exceptions.ReadTimeout:
-            logger.error(f'ReadTimeout: Нет проверенных работ!')
+            pass
         except requests.exceptions.ConnectionError:
             time.sleep(90)
             logger.error('ConnectionError: Нет подключения к интернету!')
