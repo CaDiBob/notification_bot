@@ -48,7 +48,7 @@ def make_requests(headers, bot, chat_id):
             else:
                 timestamp = answer.get('timestamp_to_request')
         except requests.exceptions.ReadTimeout:
-            pass
+            logger.error('ReadTimeout: Нет проверенных работ!')
         except requests.exceptions.ConnectionError:
             time.sleep(90)
             logger.error('ConnectionError: Нет подключения к интернету!')
