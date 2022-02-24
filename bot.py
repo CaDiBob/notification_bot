@@ -49,7 +49,7 @@ def make_requests(headers, bot, chat_id, logger):
                 url,
                 headers=headers,
                 params={'timestamp': timestamp},
-                timeout=1,
+                timeout=90,
             )
             response.raise_for_status()
             answer = response.json()
@@ -61,7 +61,7 @@ def make_requests(headers, bot, chat_id, logger):
         except requests.exceptions.ReadTimeout:
             pass
         except requests.exceptions.ConnectionError:
-            logger.info('ConnectionError: Нет подключения к интернету!')
+            logger.exception('info')
             time.sleep(90)
 
 
