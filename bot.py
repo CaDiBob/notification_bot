@@ -6,6 +6,9 @@ import time
 from environs import Env
 
 
+logger = logging.getLogger('bot')
+
+
 class TelegramLogsHandler(logging.Handler):
 
     def __init__(self, chat_id, bot):
@@ -40,7 +43,7 @@ def send_notifications(bot, answer, chat_id):
             )
 
 
-def make_requests(headers, bot, chat_id, logger):
+def make_requests(headers, bot, chat_id):
     url = 'https://dvmn.org/api/long_polling/'
     timestamp=time.time()
     while True:
@@ -49,7 +52,7 @@ def make_requests(headers, bot, chat_id, logger):
                 url,
                 headers=headers,
                 params={'timestamp': timestamp},
-                timeout=90,
+                timeout=1,
             )
             response.raise_for_status()
             answer = response.json()
@@ -61,7 +64,7 @@ def make_requests(headers, bot, chat_id, logger):
         except requests.exceptions.ReadTimeout:
             pass
         except requests.exceptions.ConnectionError:
-            logger.exception('info')
+            logger.exception('Нет подключения к интернету!')
             time.sleep(90)
 
 
@@ -72,14 +75,13 @@ def main():
     dvm_api = env('DEVMAN_API')
     chat_id = env('TG_USER_CHAT_ID')
     bot = telegram.Bot(bot_api)
-    logger = logging.getLogger('bot')
     logger.setLevel(logging.INFO)
     headers = {
         'Authorization': dvm_api,
     }
     logger.addHandler(TelegramLogsHandler(chat_id, bot))
     logger.info('Бот запущен!')
-    make_requests(headers, bot, chat_id, logger)
+    make_requests(headers, bot, chat_id)
 
 if __name__ == '__main__':
     main()
