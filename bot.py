@@ -56,7 +56,7 @@ def make_requests(headers, bot, chat_id):
             )
             response.raise_for_status()
             answer = response.json()
-            if ('status',  'found') in answer.items():
+            if answer.get('status')=='found':
                 timestamp = answer.get('last_attempt_timestamp')
                 send_notifications(bot, answer, chat_id)
             else:
