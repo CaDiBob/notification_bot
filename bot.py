@@ -52,7 +52,7 @@ def make_requests(headers, bot, chat_id):
                 url,
                 headers=headers,
                 params={'timestamp': timestamp},
-                timeout=1,
+                timeout=90,
             )
             response.raise_for_status()
             answer = response.json()
