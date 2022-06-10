@@ -29,3 +29,27 @@ DEVMAN_API='токен к API devman'
 ```bash
 python bot.py
 ```
+
+### Сборка и запуск Docker контейнера:
+
+Для запуска Docker контейнера на локальной машине [Docker должен быть установлен](https://docs.docker.com/get-docker/).
+
+Клонировать репозиторий
+
+```bash
+git clone https://github.com/CaDiBob/notification_bot.git
+cd notification_bot
+```
+
+Затем используйте следующие команды:
+
+##### Собрать образ:
+
+```bash
+docker build /путь куда хотите собрать/ -t 'имя_контейнера:тэг'
+```
+##### Запуск образа:
+
+```bash
+docker run --env-file /путь до файла .env с переменными окружения/ 'имя_контейнера:тэг'
+```
